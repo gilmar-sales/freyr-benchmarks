@@ -1,0 +1,6 @@
+Tipo,Leitura,Escrita,Cópia,Latência
+DDR4 Dual Channel,29.3,21.3,25.1,89.0
+DDR5 Dual Channel,65.4,89.8,65.6,64.0
+Cache L1,2439.3,1256.6,2504.2,0.8
+Cache L2,1258.1,1135.5,1202.6,3.0
+Cache L3,694.6,712.4,690.5,12.2
