@@ -1,0 +1,29 @@
+2026-04-12T19:24:48-03:00
+Running /home/gilmar/dev/freyr-benchmarks/scripts/../build/dispersao_memoria_execucao
+Run on (14 X 3098.64 MHz CPU s)
+CPU Caches:
+  L1 Data 32 KiB (x14)
+  L1 Instruction 32 KiB (x14)
+  L2 Unified 256 KiB (x14)
+  L3 Unified 35840 KiB (x1)
+Load Average: 1.18, 1.62, 4.13
+
+ Performance counter stats for '/home/gilmar/dev/freyr-benchmarks/scripts/../build/dispersao_memoria_execucao --benchmark_report_aggregates_only=true --benchmark_format=csv --benchmark_out=../data/dispersao_memoria_execucao_Alocacao_Dinamica_Execucao_linux.json --benchmark_filter=Alocacao_Dinamica_Execucao':
+
+     2.901.788.288      cycles:u                                                                (79,30%)
+     3.153.613.500      instructions:u                                                          (89,36%)
+       122.423.834      branches:u                                                              (89,89%)
+            73.303      branch-misses:u                                                         (90,03%)
+       158.158.810      cache-references:u                                                      (90,28%)
+            14.036      cache-misses:u                                                          (90,26%)
+     1.399.205.185      L1-dcache-loads:u                                                       (90,32%)
+       291.638.887      L1-dcache-load-misses:u                                                 (90,27%)
+       157.981.298      LLC-loads:u                                                             (90,24%)
+               987      LLC-load-misses:u                                                       (89,41%)
+
+       0,956640258 seconds time elapsed
+
+       0,935891000 seconds user
+       0,003273000 seconds sys
+
+

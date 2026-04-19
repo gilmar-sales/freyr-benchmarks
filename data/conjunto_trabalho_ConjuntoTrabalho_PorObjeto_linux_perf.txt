@@ -1,0 +1,29 @@
+2026-04-09T23:06:27-03:00
+Running /home/gilmar/dev/freyr-benchmarks/scripts/../build/conjunto_trabalho
+Run on (14 X 3120.51 MHz CPU s)
+CPU Caches:
+  L1 Data 32 KiB (x14)
+  L1 Instruction 32 KiB (x14)
+  L2 Unified 256 KiB (x14)
+  L3 Unified 35840 KiB (x1)
+Load Average: 0.33, 3.09, 4.95
+
+ Performance counter stats for '/home/gilmar/dev/freyr-benchmarks/scripts/../build/conjunto_trabalho --benchmark_report_aggregates_only=true --benchmark_format=csv --benchmark_out=../data/conjunto_trabalho_ConjuntoTrabalho_PorObjeto_linux.json --benchmark_filter=ConjuntoTrabalho_PorObjeto':
+
+       209.940.832      cycles:u                                                                (75,30%)
+       281.702.738      instructions:u                                                          (87,72%)
+         6.651.696      branches:u                                                              (87,97%)
+            26.610      branch-misses:u                                                         (89,47%)
+         8.560.818      cache-references:u                                                      (91,76%)
+             3.948      cache-misses:u                                                          (91,78%)
+       100.826.443      L1-dcache-loads:u                                                       (91,76%)
+        15.836.360      L1-dcache-load-misses:u                                                 (92,23%)
+         2.064.008      LLC-loads:u                                                             (88,08%)
+               733      LLC-load-misses:u                                                       (91,65%)
+
+       0,074303915 seconds time elapsed
+
+       0,069487000 seconds user
+       0,003462000 seconds sys
+
+

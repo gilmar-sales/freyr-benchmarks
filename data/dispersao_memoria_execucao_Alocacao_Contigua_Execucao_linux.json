@@ -1,0 +1,56 @@
+{
+  "context": {
+    "date": "2026-04-12T19:24:49-03:00",
+    "host_name": "archlinux",
+    "executable": "/home/gilmar/dev/freyr-benchmarks/scripts/../build/dispersao_memoria_execucao",
+    "num_cpus": 14,
+    "mhz_per_cpu": 3288,
+    "cpu_scaling_enabled": false,
+    "caches": [
+      {
+        "type": "Data",
+        "level": 1,
+        "size": 32768,
+        "num_sharing": 1
+      },
+      {
+        "type": "Instruction",
+        "level": 1,
+        "size": 32768,
+        "num_sharing": 1
+      },
+      {
+        "type": "Unified",
+        "level": 2,
+        "size": 262144,
+        "num_sharing": 1
+      },
+      {
+        "type": "Unified",
+        "level": 3,
+        "size": 36700160,
+        "num_sharing": 14
+      }
+    ],
+    "load_avg": [1.17676,1.61719,4.13086],
+    "library_version": "v1.9.2",
+    "library_build_type": "release",
+    "json_schema_version": 1
+  },
+  "benchmarks": [
+    {
+      "name": "Alocacao_Contigua_Execucao/10000",
+      "family_index": 0,
+      "per_family_instance_index": 0,
+      "run_name": "Alocacao_Contigua_Execucao/10000",
+      "run_type": "iteration",
+      "repetitions": 1,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 48108,
+      "real_time": 1.4383202419557778e+04,
+      "cpu_time": 1.4067545522574208e+04,
+      "time_unit": "ns"
+    }
+  ]
+}

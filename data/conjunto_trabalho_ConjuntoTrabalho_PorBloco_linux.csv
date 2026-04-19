@@ -1,0 +1,5 @@
+name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
+"ConjuntoTrabalho_PorBlocos/10000/iterations:10/repeats:100_mean",100,44580.9,44304.7,ns,,,,,
+"ConjuntoTrabalho_PorBlocos/10000/iterations:10/repeats:100_median",100,43066,43003.6,ns,,,,,
+"ConjuntoTrabalho_PorBlocos/10000/iterations:10/repeats:100_stddev",100,6038.67,5896.32,ns,,,,,
+"ConjuntoTrabalho_PorBlocos/10000/iterations:10/repeats:100_cv",100,0.135454,0.133085,,,,,,

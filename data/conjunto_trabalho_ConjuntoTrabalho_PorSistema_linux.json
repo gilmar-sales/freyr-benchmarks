@@ -1,0 +1,102 @@
+{
+  "context": {
+    "date": "2026-04-09T23:06:26-03:00",
+    "host_name": "archlinux",
+    "executable": "/home/gilmar/dev/freyr-benchmarks/scripts/../build/conjunto_trabalho",
+    "num_cpus": 14,
+    "mhz_per_cpu": 2683,
+    "cpu_scaling_enabled": false,
+    "caches": [
+      {
+        "type": "Data",
+        "level": 1,
+        "size": 32768,
+        "num_sharing": 1
+      },
+      {
+        "type": "Instruction",
+        "level": 1,
+        "size": 32768,
+        "num_sharing": 1
+      },
+      {
+        "type": "Unified",
+        "level": 2,
+        "size": 262144,
+        "num_sharing": 1
+      },
+      {
+        "type": "Unified",
+        "level": 3,
+        "size": 36700160,
+        "num_sharing": 14
+      }
+    ],
+    "load_avg": [0.328613,3.09473,4.94678],
+    "library_version": "v1.9.2",
+    "library_build_type": "release",
+    "json_schema_version": 1
+  },
+  "benchmarks": [
+    {
+      "name": "ConjuntoTrabalho_PorSistema/10000/iterations:10/repeats:100_mean",
+      "family_index": 0,
+      "per_family_instance_index": 0,
+      "run_name": "ConjuntoTrabalho_PorSistema/10000/iterations:10/repeats:100",
+      "run_type": "aggregate",
+      "repetitions": 100,
+      "threads": 1,
+      "aggregate_name": "mean",
+      "aggregate_unit": "time",
+      "iterations": 100,
+      "real_time": 8.6554940999121754e+04,
+      "cpu_time": 8.5605175999999687e+04,
+      "time_unit": "ns"
+    },
+    {
+      "name": "ConjuntoTrabalho_PorSistema/10000/iterations:10/repeats:100_median",
+      "family_index": 0,
+      "per_family_instance_index": 0,
+      "run_name": "ConjuntoTrabalho_PorSistema/10000/iterations:10/repeats:100",
+      "run_type": "aggregate",
+      "repetitions": 100,
+      "threads": 1,
+      "aggregate_name": "median",
+      "aggregate_unit": "time",
+      "iterations": 100,
+      "real_time": 8.4399150000535883e+04,
+      "cpu_time": 8.3583400000000402e+04,
+      "time_unit": "ns"
+    },
+    {
+      "name": "ConjuntoTrabalho_PorSistema/10000/iterations:10/repeats:100_stddev",
+      "family_index": 0,
+      "per_family_instance_index": 0,
+      "run_name": "ConjuntoTrabalho_PorSistema/10000/iterations:10/repeats:100",
+      "run_type": "aggregate",
+      "repetitions": 100,
+      "threads": 1,
+      "aggregate_name": "stddev",
+      "aggregate_unit": "time",
+      "iterations": 100,
+      "real_time": 8.7592492290784794e+03,
+      "cpu_time": 7.9604785370861982e+03,
+      "time_unit": "ns"
+    },
+    {
+      "name": "ConjuntoTrabalho_PorSistema/10000/iterations:10/repeats:100_cv",
+      "family_index": 0,
+      "per_family_instance_index": 0,
+      "run_name": "ConjuntoTrabalho_PorSistema/10000/iterations:10/repeats:100",
+      "run_type": "aggregate",
+      "repetitions": 100,
+      "threads": 1,
+      "aggregate_name": "cv",
+      "aggregate_unit": "percentage",
+      "iterations": 100,
+      "real_time": 1.0119871988783816e-01,
+      "cpu_time": 9.2990621701265208e-02,
+      "time_unit": "ns"
+    }
+  ]
+}
