@@ -136,7 +136,7 @@ flecs::system flecsSystem;
 static void ECS_Iteracao_Flecs_Iniciar(const benchmark::State& state)
 {
     flecsWorld = new flecs::world;
-    flecsWorld->set_threads(std::thread::hardware_concurrency());
+    flecsWorld->set_threads(std::thread::hardware_concurrency() - 1);
 
     flecsSystem = flecsWorld->system<Position, Velocity, Acceleration>()
                       .multi_threaded()

@@ -89,7 +89,7 @@ static void ECS_Particionamento_Freyr_Iniciar(const benchmark::State& state)
     app = skr::ApplicationBuilder()
               .WithExtension<fr::FreyrExtension>([&](fr::FreyrExtension& freyr) {
                   freyr.WithOptions([&](fr::FreyrOptionsBuilder& freyrOptions) {
-                           freyrOptions.WithMaxEntities(state.range()).WithThreadCount(std::thread::hardware_concurrency());
+                           freyrOptions.WithMaxEntities(state.range()).WithThreadCount(std::thread::hardware_concurrency() - 1);
                        })
                       .WithComponent<TransformComponent>();
               })
@@ -236,9 +236,9 @@ static void ECS_Particionamento_Entt_TBB(benchmark::State& state)
                 auto entity                      = group[i];
                 auto [transform, sphereCollider] = group.get(entity);
                 auto particle                    = Particle {
-                                       .entity         = static_cast<size_t>(entity),
-                                       .transform      = transform,
-                                       .sphereCollider = sphereCollider
+                    .entity         = static_cast<size_t>(entity),
+                    .transform      = transform,
+                    .sphereCollider = sphereCollider
                 };
                 auto collisions = std::vector<Particle>();
                 QueryOctree(collisions, entity, transform, sphereCollider);
@@ -292,7 +292,7 @@ static void ECS_Iteracao_Flecs_Iniciar(const benchmark::State& state)
 static void ECS_Iteracao_Flecs_Iniciar_multi(const benchmark::State& state)
 {
     flecsWorld = new flecs::world;
-    flecsWorld->set_threads(std::thread::hardware_concurrency());
+    flecsWorld->set_threads(std::thread::hardware_concurrency() - 1);
 
     buildOctreeSystem =
         flecsWorld->system<TransformComponent, SphereColliderComponent>()

@@ -157,7 +157,8 @@ fn main() {
                 apply_gravity,
                 apply_acceleration,
                 apply_velocity,
-            ),
+            )
+                .chain(),
         )
         .run();
 }

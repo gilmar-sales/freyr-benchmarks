@@ -52,13 +52,6 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(flecs)
 
-FetchContent_Declare(
-        gaia
-        GIT_REPOSITORY "https://github.com/richardbiely/gaia-ecs.git"
-        GIT_TAG "v0.9.2"
-)
-FetchContent_MakeAvailable(gaia)
-
 # add_subdirectory(vendor/perfetto)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
@@ -126,3 +119,4 @@ target_compile_options(ecs_iteracao_assincrona_profile PRIVATE
 
 add_subdirectory(src/bevy-freyr/freyr)
 add_subdirectory(src/bevy-freyr/entt_tbb)
+add_subdirectory(src/bevy-freyr/flecs)
