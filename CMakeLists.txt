@@ -51,6 +51,7 @@ FetchContent_Declare(
         GIT_TAG "v4.1.5"
 )
 FetchContent_MakeAvailable(flecs)
+target_compile_definitions(flecs PUBLIC FLECS_PERF_TRACE)
 
 # add_subdirectory(vendor/perfetto)
 

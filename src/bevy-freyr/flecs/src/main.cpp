@@ -61,6 +61,13 @@ static void ApplyVelocitySystem(Position& position, Velocity& velocity)
 
 int main()
 {
+    ecs_os_api.perf_trace_push_ = [](const char* name, auto, auto) {
+        TRACE_EVENT_BEGIN("flecs", perfetto::DynamicString{name});
+    };
+
+    ecs_os_api.perf_trace_pop_ = [](const char* name, auto, auto) {
+        TRACE_EVENT_END("flecs");
+    };
 
     auto args = perfetto::TracingInitArgs();
     args.backends |= perfetto::kInProcessBackend;
@@ -96,17 +103,30 @@ int main()
     flecs::world* flecsWorld = new flecs::world;
     flecsWorld->set_threads(std::thread::hardware_concurrency() - 1);
 
-    flecs::system gravitySystem = flecsWorld->system<Acceleration>()
-                                      .multi_threaded()
-                                      .each(ApplyGravitySystem);
+    auto MakeTracedRun = [](const char* name) {
+        return [name](flecs::iter& it) {
+            TRACE_EVENT_BEGIN("flecs", perfetto::DynamicString{name});
+            while (it.next()) {
+                it.each();
+            }
+            TRACE_EVENT_END("flecs");
+        };
+    };
 
-    flecs::system accelerationSystem = flecsWorld->system<Velocity, Acceleration>()
-                                           .multi_threaded()
-                                           .each(ApplyAccelerationSystem);
+    flecs::system gravitySystem =
+        flecsWorld->system<Acceleration>()
+            .multi_threaded()
+            .run(MakeTracedRun("ApplyGravity"), ApplyGravitySystem);
 
-    flecs::system velocitySystem = flecsWorld->system<Position, Velocity>()
-                                       .multi_threaded()
-                                       .each(ApplyVelocitySystem);
+    flecs::system accelerationSystem =
+        flecsWorld->system<Velocity, Acceleration>()
+            .multi_threaded()
+            .run(MakeTracedRun("ApplyAcceleration"), ApplyAccelerationSystem);
+
+    flecs::system velocitySystem =
+        flecsWorld->system<Position, Velocity>()
+            .multi_threaded()
+            .run(MakeTracedRun("ApplyVelocity"), ApplyVelocitySystem);
 
     flecsWorld->component<Position>();
     flecsWorld->component<Velocity>();
