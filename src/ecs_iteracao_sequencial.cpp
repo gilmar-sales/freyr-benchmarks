@@ -52,7 +52,7 @@ Ref<MyApp> app;
 void       ECS_Iteracao_Freyr_Iniciar(const benchmark::State& state)
 {
     app = skr::ApplicationBuilder()
-              .AddExtension<fr::FreyrExtension>([&](fr::FreyrExtension& freyr) {
+              .WithExtension<fr::FreyrExtension>([&](fr::FreyrExtension& freyr) {
                   freyr.WithOptions([&](fr::FreyrOptionsBuilder& freyrOptions) {
                            freyrOptions.WithMaxEntities(state.range()).WithArchetypeChunkCapacity(state.range(1));
                        })
@@ -62,7 +62,7 @@ void       ECS_Iteracao_Freyr_Iniciar(const benchmark::State& state)
               })
               .Build<MyApp>();
 
-    auto scene = app->GetRootServiceProvider().GetService<fr::Scene>();
+    auto scene = app->GetRootServiceProvider()->GetService<fr::Scene>();
 
     scene->CreateArchetypeBuilder()
         .WithComponent(Position {})
@@ -74,11 +74,11 @@ void       ECS_Iteracao_Freyr_Iniciar(const benchmark::State& state)
 
 static void ECS_Iteracao_Freyr(benchmark::State& state)
 {
-    auto scene = app->GetRootServiceProvider().GetService<fr::Scene>();
+    auto scene = app->GetRootServiceProvider()->GetService<fr::Scene>();
 
     for (auto _ : state)
     {
-        scene->ForEach<Position, Velocity, Acceleration>(MovementSystem);
+        scene->CreateQuery()->Each<Position, Velocity, Acceleration>(MovementSystem);
     }
 }
 

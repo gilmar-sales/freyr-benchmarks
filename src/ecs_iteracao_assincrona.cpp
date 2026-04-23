@@ -62,7 +62,7 @@ Ref<MyApp>  app;
 static void Freyr_Iniciar(const benchmark::State& state)
 {
     app = skr::ApplicationBuilder()
-              .AddExtension<fr::FreyrExtension>([&](fr::FreyrExtension& freyr) {
+              .WithExtension<fr::FreyrExtension>([&](fr::FreyrExtension& freyr) {
                   freyr.WithOptions([&](fr::FreyrOptionsBuilder& freyrOptions) {
                            freyrOptions.WithMaxEntities(state.range(0))
                                .WithThreadCount(std::thread::hardware_concurrency())
@@ -74,18 +74,18 @@ static void Freyr_Iniciar(const benchmark::State& state)
               })
               .Build<MyApp>();
 
-    auto scene = app->GetRootServiceProvider().GetService<fr::Scene>();
+    auto scene = app->GetRootServiceProvider()->GetService<fr::Scene>();
 
     scene->CreateArchetypeBuilder().WithComponent(Position {}).WithComponent(Velocity {}).WithComponent(Acceleration { .x = 1.0f, .y = 1.0f, .z = 0.0f }).WithEntities(state.range(0)).Build();
 }
 
 static void ECS_Iteracao_Freyr_RouboTrabalho(benchmark::State& state)
 {
-    auto scene = app->GetRootServiceProvider().GetService<fr::Scene>();
+    auto scene = app->GetRootServiceProvider()->GetService<fr::Scene>();
 
     for (auto _ : state)
     {
-        scene->ForEachAsync<Position, Velocity, Acceleration>(MovementSystem);
+        scene->CreateQuery()->EachAsync<Position, Velocity, Acceleration>(MovementSystem);
 
         scene->ExecuteTasks();
     }

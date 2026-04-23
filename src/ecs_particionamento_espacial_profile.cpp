@@ -63,7 +63,7 @@ Ref<MyApp>  app;
 static void ECS_Particionamento_Freyr_Iniciar(size_t entity_count, size_t thread_count)
 {
     app = skr::ApplicationBuilder()
-              .AddExtension<fr::FreyrExtension>([&](fr::FreyrExtension& freyr) {
+              .WithExtension<fr::FreyrExtension>([&](fr::FreyrExtension& freyr) {
                   freyr.WithOptions([&](fr::FreyrOptionsBuilder& freyrOptions) {
                            freyrOptions.WithMaxEntities(entity_count).WithThreadCount(thread_count).WithArchetypeChunkCapacity(4 * 1024);
                        })
@@ -71,7 +71,7 @@ static void ECS_Particionamento_Freyr_Iniciar(size_t entity_count, size_t thread
               })
               .Build<MyApp>();
 
-    auto scene = app->GetRootServiceProvider().GetService<fr::Scene>();
+    auto scene = app->GetRootServiceProvider()->GetService<fr::Scene>();
 
     scene->CreateArchetypeBuilder()
         .WithComponent(TransformComponent {})
@@ -92,12 +92,12 @@ static void ECS_Particionamento_Freyr_Iniciar(size_t entity_count, size_t thread
 
 static void ECS_Particionamento_Freyr_Assinc()
 {
-    auto scene = app->GetRootServiceProvider().GetService<fr::Scene>();
+    auto scene = app->GetRootServiceProvider()->GetService<fr::Scene>();
 
     arena.reset();
     auto octree = arena.construct<Octree>(glm::vec3(0.0f), 100'000.0f, &arena);
 
-    scene->ForEachAsync<TransformComponent, SphereColliderComponent>([octree](const fr::Entity entity, TransformComponent& transform, SphereColliderComponent& sphereCollider) {
+    scene->CreateQuery()->EachAsync<TransformComponent, SphereColliderComponent>([octree](const fr::Entity entity, TransformComponent& transform, SphereColliderComponent& sphereCollider) {
         const auto particle = Particle {
             .entity         = entity,
             .transform      = transform,
@@ -109,7 +109,7 @@ static void ECS_Particionamento_Freyr_Assinc()
 
     scene->ExecuteTasks();
 
-    scene->ForEachAsync<TransformComponent, SphereColliderComponent>([octree](const fr::Entity entity, TransformComponent& transform, SphereColliderComponent& sphereCollider) {
+    scene->CreateQuery()->EachAsync<TransformComponent, SphereColliderComponent>([octree](const fr::Entity entity, TransformComponent& transform, SphereColliderComponent& sphereCollider) {
         auto particle = Particle {
             .entity         = entity,
             .transform      = transform,
@@ -180,9 +180,9 @@ static void ECS_Particionamento_Entt_Paralelo(size_t entity_count, size_t num_th
             {
                 auto [transform, sphereCollider] = view.get(*it);
                 const auto particle              = Particle {
-                    .entity         = static_cast<size_t>(*it),
-                    .transform      = transform,
-                    .sphereCollider = sphereCollider
+                                 .entity         = static_cast<size_t>(*it),
+                                 .transform      = transform,
+                                 .sphereCollider = sphereCollider
                 };
 
                 octree->Insert(particle);
@@ -215,9 +215,9 @@ static void ECS_Particionamento_Entt_Paralelo(size_t entity_count, size_t num_th
             {
                 auto [transform, sphereCollider] = view.get(*it);
                 auto particle                    = Particle {
-                    .entity         = static_cast<size_t>(*it),
-                    .transform      = transform,
-                    .sphereCollider = sphereCollider
+                                       .entity         = static_cast<size_t>(*it),
+                                       .transform      = transform,
+                                       .sphereCollider = sphereCollider
                 };
 
                 auto collisions = std::vector<Particle>();
@@ -244,12 +244,12 @@ int main(int argc, char const* argv[])
     // ECS_Particionamento_Entt_Paralelo_Iniciar(entity_count);
     ECS_Particionamento_Freyr_Iniciar(entity_count, thread_count);
 
-    app->GetRootServiceProvider().GetService<fr::Scene>()->BeginProfiling();
-    app->GetRootServiceProvider().GetService<fr::Scene>()->Update(0.0f);
+    app->GetRootServiceProvider()->GetService<fr::Scene>()->BeginProfiling();
+    app->GetRootServiceProvider()->GetService<fr::Scene>()->Update(0.0f);
 
     // ECS_Particionamento_Entt_Paralelo(entity_count, thread_count);
     ECS_Particionamento_Freyr_Assinc();
-    app->GetRootServiceProvider().GetService<fr::Scene>()->EndProfiling();
+    app->GetRootServiceProvider()->GetService<fr::Scene>()->EndProfiling();
 
     return 0;
 }

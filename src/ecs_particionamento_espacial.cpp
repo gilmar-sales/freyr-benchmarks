@@ -87,7 +87,7 @@ Ref<MyApp>  app;
 static void ECS_Particionamento_Freyr_Iniciar(const benchmark::State& state)
 {
     app = skr::ApplicationBuilder()
-              .AddExtension<fr::FreyrExtension>([&](fr::FreyrExtension& freyr) {
+              .WithExtension<fr::FreyrExtension>([&](fr::FreyrExtension& freyr) {
                   freyr.WithOptions([&](fr::FreyrOptionsBuilder& freyrOptions) {
                            freyrOptions.WithMaxEntities(state.range()).WithThreadCount(std::thread::hardware_concurrency());
                        })
@@ -95,7 +95,7 @@ static void ECS_Particionamento_Freyr_Iniciar(const benchmark::State& state)
               })
               .Build<MyApp>();
 
-    auto scene = app->GetRootServiceProvider().GetService<fr::Scene>();
+    auto scene = app->GetRootServiceProvider()->GetService<fr::Scene>();
 
     scene->CreateArchetypeBuilder()
         .WithComponent(TransformComponent {})
@@ -116,18 +116,18 @@ static void ECS_Particionamento_Freyr_Iniciar(const benchmark::State& state)
 
 static void ECS_Particionamento_Freyr(benchmark::State& state)
 {
-    auto scene = app->GetRootServiceProvider().GetService<fr::Scene>();
+    auto scene = app->GetRootServiceProvider()->GetService<fr::Scene>();
 
     for (auto _ : state)
     {
         arena.reset();
         octree = arena.construct<Octree>(glm::vec3(0.0f), 100'000.0f, &arena);
 
-        scene->ForEach<TransformComponent, SphereColliderComponent>([](const fr::Entity entity, TransformComponent& transform, SphereColliderComponent& sphereCollider) {
+        scene->CreateQuery()->Each<TransformComponent, SphereColliderComponent>([](const fr::Entity entity, TransformComponent& transform, SphereColliderComponent& sphereCollider) {
             BuildOctree(entity, transform, sphereCollider);
         });
 
-        scene->ForEach<TransformComponent, SphereColliderComponent>([](const fr::Entity entity, TransformComponent& transform, SphereColliderComponent& sphereCollider) {
+        scene->CreateQuery()->Each<TransformComponent, SphereColliderComponent>([](const fr::Entity entity, TransformComponent& transform, SphereColliderComponent& sphereCollider) {
             auto collisions = std::vector<Particle>();
             QueryOctree(collisions, entity, transform, sphereCollider);
             benchmark::DoNotOptimize(collisions);
@@ -139,20 +139,20 @@ static void ECS_Particionamento_Freyr(benchmark::State& state)
 
 static void ECS_Particionamento_Freyr_Assinc(benchmark::State& state)
 {
-    auto scene = app->GetRootServiceProvider().GetService<fr::Scene>();
+    auto scene = app->GetRootServiceProvider()->GetService<fr::Scene>();
 
     for (auto _ : state)
     {
         arena.reset();
         octree = arena.construct<Octree>(glm::vec3(0.0f), 100'000.0f, &arena);
 
-        scene->ForEachAsync<TransformComponent, SphereColliderComponent>([](const fr::Entity entity, TransformComponent& transform, SphereColliderComponent& sphereCollider) {
+        scene->CreateQuery()->EachAsync<TransformComponent, SphereColliderComponent>([](const fr::Entity entity, TransformComponent& transform, SphereColliderComponent& sphereCollider) {
             BuildOctree(entity, transform, sphereCollider);
         });
 
         scene->ExecuteTasks();
 
-        scene->ForEachAsync<TransformComponent, SphereColliderComponent>([](const fr::Entity entity, TransformComponent& transform, SphereColliderComponent& sphereCollider) {
+        scene->CreateQuery()->EachAsync<TransformComponent, SphereColliderComponent>([](const fr::Entity entity, TransformComponent& transform, SphereColliderComponent& sphereCollider) {
             auto collisions = std::vector<Particle>();
             QueryOctree(collisions, entity, transform, sphereCollider);
             benchmark::DoNotOptimize(collisions);
@@ -236,9 +236,9 @@ static void ECS_Particionamento_Entt_TBB(benchmark::State& state)
                 auto entity                      = group[i];
                 auto [transform, sphereCollider] = group.get(entity);
                 auto particle                    = Particle {
-                    .entity         = static_cast<size_t>(entity),
-                    .transform      = transform,
-                    .sphereCollider = sphereCollider
+                                       .entity         = static_cast<size_t>(entity),
+                                       .transform      = transform,
+                                       .sphereCollider = sphereCollider
                 };
                 auto collisions = std::vector<Particle>();
                 QueryOctree(collisions, entity, transform, sphereCollider);

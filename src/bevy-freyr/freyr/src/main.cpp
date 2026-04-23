@@ -29,7 +29,7 @@ class ApplyGravitySystem : fr::System
 
     void Update(float deltaTime) override
     {
-        mScene->ForEachAsync<Acceleration>([deltaTime](auto entity, Acceleration& acceleration) {
+        mScene->CreateQuery()->EachAsync<Acceleration>([deltaTime](auto entity, Acceleration& acceleration) {
             acceleration.y -= 9.84f * deltaTime;
         });
     }
@@ -43,7 +43,7 @@ class ApplyAccelerationSystem : fr::System
 
     void Update(float deltaTime) override
     {
-        mScene->ForEachAsync<Velocity, Acceleration>([deltaTime](auto entity, Velocity& velocity, const Acceleration& acceleration) {
+        mScene->CreateQuery()->EachAsync<Velocity, Acceleration>([deltaTime](auto entity, Velocity& velocity, const Acceleration& acceleration) {
             velocity.x += acceleration.x * deltaTime;
             velocity.y += acceleration.y * deltaTime;
             velocity.z += acceleration.z * deltaTime;
@@ -59,7 +59,7 @@ class ApplyVelocitySystem : fr::System
 
     void Update(float deltaTime) override
     {
-        mScene->ForEachAsync<Position, Velocity>([deltaTime](auto entity, Position& position, const Velocity& velocity) {
+        mScene->CreateQuery()->EachAsync<Position, Velocity>([deltaTime](auto entity, Position& position, const Velocity& velocity) {
             position.x += velocity.x * deltaTime;
             position.y += velocity.y * deltaTime;
             position.z += velocity.z * deltaTime;
@@ -99,7 +99,7 @@ class MyApp final : public skr::IApplication
 int main()
 {
     auto app = skr::ApplicationBuilder()
-                   .AddExtension<fr::FreyrExtension>([&](fr::FreyrExtension& freyr) {
+                   .WithExtension<fr::FreyrExtension>([&](fr::FreyrExtension& freyr) {
                        freyr.WithOptions([&](fr::FreyrOptionsBuilder& freyrOptions) {
                                 freyrOptions
                                     .WithThreadCount(std::thread::hardware_concurrency())
@@ -108,9 +108,12 @@ int main()
                            .WithComponent<Position>()
                            .WithComponent<Velocity>()
                            .WithComponent<Acceleration>()
-                           .WithSystem<ApplyGravitySystem>()
-                           .WithSystem<ApplyAccelerationSystem>()
-                           .WithSystem<ApplyVelocitySystem>();
+                           .WithPipeline([](fr::PipelineBuilder& pipeline) {
+                               pipeline
+                                   .WithSystem<ApplyGravitySystem>()
+                                   .WithSystem<ApplyAccelerationSystem>()
+                                   .WithSystem<ApplyVelocitySystem>();
+                           });
                    })
                    .Build<MyApp>();
 

@@ -26,7 +26,7 @@ option(FREYR_PROFILING "Enable profiling" ON)
 FetchContent_Declare(
         freyr
         GIT_REPOSITORY "https://github.com/gilmar-sales/Freyr.git"
-        GIT_TAG "v0.23.10"
+        GIT_TAG "v0.26.0"
 )
 FetchContent_MakeAvailable(freyr)
 

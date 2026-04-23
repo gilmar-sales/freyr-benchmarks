@@ -32,7 +32,7 @@ Ref<MyApp>  app;
 static void Freyr_Iniciar(size_t entity_count, size_t chunk_capacity, size_t thread_count)
 {
     app = skr::ApplicationBuilder()
-              .AddExtension<fr::FreyrExtension>([&](fr::FreyrExtension& freyr) {
+              .WithExtension<fr::FreyrExtension>([&](fr::FreyrExtension& freyr) {
                   freyr.WithOptions([&](fr::FreyrOptionsBuilder& freyrOptions) {
                            freyrOptions.WithMaxEntities(entity_count)
                                .WithArchetypeChunkCapacity(chunk_capacity)
@@ -42,16 +42,16 @@ static void Freyr_Iniciar(size_t entity_count, size_t chunk_capacity, size_t thr
               })
               .Build<MyApp>();
 
-    auto scene = app->GetRootServiceProvider().GetService<fr::Scene>();
+    auto scene = app->GetRootServiceProvider()->GetService<fr::Scene>();
 
     scene->CreateArchetypeBuilder().WithComponent(Position {}).WithComponent(Velocity { .x = 1.0f, .y = 2.0f, .z = 3.0f }).WithEntities(entity_count).Build();
 }
 
 static void ECS_Iteracao_Freyr_RouboTrabalho()
 {
-    auto scene = app->GetRootServiceProvider().GetService<fr::Scene>();
+    auto scene = app->GetRootServiceProvider()->GetService<fr::Scene>();
 
-    scene->ForEachAsync<Position, Velocity>([](const fr::Entity entity, Position& position, Velocity& velocity) {
+    scene->CreateQuery()->EachAsync<Position, Velocity>([](const fr::Entity entity, Position& position, Velocity& velocity) {
         position.x += velocity.x;
         position.y += velocity.y;
         position.z += velocity.z;
@@ -125,15 +125,15 @@ int main(int argc, char const* argv[])
     // EnTT_Iniciar(entity_count);
     Freyr_Iniciar(entity_count, 16 * 3 * 1024, thread_count);
 
-    // app->GetRootServiceProvider().GetService<fr::Scene>()->BeginProfiling();
-    app->GetRootServiceProvider().GetService<fr::Scene>()->Update(0.0f);
+    // app->GetRootServiceProvider()->GetService<fr::Scene>()->BeginProfiling();
+    app->GetRootServiceProvider()->GetService<fr::Scene>()->Update(0.0f);
 
     for (size_t i = 0; i < 1000; i++)
     {
         // ECS_Iteracao_EnTT_Paralelo(entity_count, thread_count);
 
         ECS_Iteracao_Freyr_RouboTrabalho();
-        // app->GetRootServiceProvider().GetService<fr::Scene>()->EndProfiling();
+        // app->GetRootServiceProvider()->GetService<fr::Scene>()->EndProfiling();
     }
 
     return 0;
