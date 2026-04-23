@@ -107,7 +107,7 @@ fn contar_iteracoes(mut iteracoes: ResMut<Iteracoes>, mut exit: MessageWriter<Ap
 }
 
 fn main() {
-    let threads = available_parallelism();
+    let threads = available_parallelism() - 1;
 
     App::new()
         .add_plugins(
