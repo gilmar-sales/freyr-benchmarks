@@ -38,7 +38,7 @@ struct Acceleration
     float z;
 };
 
-constexpr auto BlockSize = 4096;
+constexpr auto BlockSize = 8192;
 
 int main()
 {

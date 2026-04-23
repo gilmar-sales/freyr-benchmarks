@@ -103,7 +103,7 @@ int main()
                        freyr.WithOptions([&](fr::FreyrOptionsBuilder& freyrOptions) {
                                 freyrOptions
                                     .WithThreadCount(std::thread::hardware_concurrency() - 1)
-                                    .WithArchetypeChunkCapacity(4096);
+                                    .WithArchetypeChunkCapacity(8192);
                             })
                            .WithComponent<Position>()
                            .WithComponent<Velocity>()

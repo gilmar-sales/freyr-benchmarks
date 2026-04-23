@@ -3,7 +3,7 @@
 ```sql
 WITH update_slices AS (SELECT dur, ROW_NUMBER() OVER (ORDER BY dur) AS rn, COUNT(*) OVER ()                  AS total
                        FROM slice
-                       WHERE name = 'Update' AND dur > 0),
+                       WHERE name = 'Schedule: Update' AND dur > 0),
      stats AS (SELECT COUNT(*) AS cnt, SUM(dur) AS sum_dur, AVG(dur) AS avg_dur, SUM(dur * dur) AS sum_sq
                FROM update_slices),
      median_calc AS (SELECT AVG(dur) AS median_dur FROM update_slices WHERE rn IN ((total + 1) / 2, (total + 2) / 2))
