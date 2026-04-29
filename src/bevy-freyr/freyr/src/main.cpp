@@ -29,7 +29,7 @@ class ApplyGravitySystem : fr::System
 
     void Update(float deltaTime) override
     {
-        mScene->CreateQuery()->EachAsync<Acceleration>([deltaTime](auto entity, Acceleration& acceleration) {
+        mScene->CreateQuery()->EachAsync<Acceleration>([deltaTime](Acceleration& acceleration) {
             acceleration.y -= 9.84f * deltaTime;
         });
     }
@@ -43,7 +43,7 @@ class ApplyAccelerationSystem : fr::System
 
     void Update(float deltaTime) override
     {
-        mScene->CreateQuery()->EachAsync<Velocity, Acceleration>([deltaTime](auto entity, Velocity& velocity, const Acceleration& acceleration) {
+        mScene->CreateQuery()->EachAsync<Velocity, Acceleration>([deltaTime](Velocity& velocity, const Acceleration& acceleration) {
             velocity.x += acceleration.x * deltaTime;
             velocity.y += acceleration.y * deltaTime;
             velocity.z += acceleration.z * deltaTime;
@@ -59,7 +59,7 @@ class ApplyVelocitySystem : fr::System
 
     void Update(float deltaTime) override
     {
-        mScene->CreateQuery()->EachAsync<Position, Velocity>([deltaTime](auto entity, Position& position, const Velocity& velocity) {
+        mScene->CreateQuery()->EachAsync<Position, Velocity>([deltaTime](Position& position, const Velocity& velocity) {
             position.x += velocity.x * deltaTime;
             position.y += velocity.y * deltaTime;
             position.z += velocity.z * deltaTime;
@@ -81,7 +81,7 @@ class MyApp final : public skr::IApplication
             .WithComponent(Position {})
             .WithComponent(Acceleration { .x = 1.0f, .y = 1.0f, .z = 1.0f })
             .WithComponent(Velocity {})
-            .WithEntities(1'000'000)
+            .WithEntities(10'000'000)
             .Build();
 
         for (auto i = 0; i < 1000; i++)

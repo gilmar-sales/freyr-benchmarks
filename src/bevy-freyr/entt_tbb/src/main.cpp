@@ -75,7 +75,7 @@ int main()
 
     entt::registry registry;
 
-    for (int i = 0; i < 1'000'000; ++i)
+    for (int i = 0; i < 10'000'000; ++i)
     {
         auto entity = registry.create();
         registry.emplace<Position>(entity, 0.0f, 0.0f, 0.0f);

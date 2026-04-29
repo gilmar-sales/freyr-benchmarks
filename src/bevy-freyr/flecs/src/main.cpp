@@ -132,7 +132,7 @@ int main()
     flecsWorld->component<Velocity>();
     flecsWorld->component<Acceleration>();
 
-    for (auto i = 0u; i < 1'000'000; ++i)
+    for (auto i = 0u; i < 10'000'000; ++i)
     {
         flecsWorld->entity()
             .add<Position>()
