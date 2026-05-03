@@ -1,101 +1,102 @@
 {
   "context": {
-    "date": "2026-04-09T23:06:27-03:00",
+    "date": "2026-05-03T19:37:55-03:00",
     "host_name": "archlinux",
-    "executable": "/home/gilmar/dev/freyr-benchmarks/scripts/../build/conjunto_trabalho",
-    "num_cpus": 14,
-    "mhz_per_cpu": 3121,
+    "executable": "/home/gilmar/dev/freyr-benchmarks/scripts/../cmake-build-release/conjunto_trabalho",
+    "num_cpus": 28,
+    "mhz_per_cpu": 3572,
     "cpu_scaling_enabled": false,
+    "aslr_enabled": false,
     "caches": [
       {
         "type": "Data",
         "level": 1,
         "size": 32768,
-        "num_sharing": 1
+        "num_sharing": 2
       },
       {
         "type": "Instruction",
         "level": 1,
         "size": 32768,
-        "num_sharing": 1
+        "num_sharing": 2
       },
       {
         "type": "Unified",
         "level": 2,
         "size": 262144,
-        "num_sharing": 1
+        "num_sharing": 2
       },
       {
         "type": "Unified",
         "level": 3,
         "size": 36700160,
-        "num_sharing": 14
+        "num_sharing": 28
       }
     ],
-    "load_avg": [0.328613,3.09473,4.94678],
-    "library_version": "v1.9.2",
+    "load_avg": [2.38477,2.15723,4.16797],
+    "library_version": "v1.9.5",
     "library_build_type": "release",
     "json_schema_version": 1
   },
   "benchmarks": [
     {
-      "name": "ConjuntoTrabalho_PorObjeto/10000/iterations:10/repeats:100_mean",
+      "name": "ConjuntoTrabalho_PorObjeto/1000000/iterations:10/repeats:100_mean",
       "family_index": 0,
       "per_family_instance_index": 0,
-      "run_name": "ConjuntoTrabalho_PorObjeto/10000/iterations:10/repeats:100",
+      "run_name": "ConjuntoTrabalho_PorObjeto/1000000/iterations:10/repeats:100",
       "run_type": "aggregate",
       "repetitions": 100,
       "threads": 1,
       "aggregate_name": "mean",
       "aggregate_unit": "time",
       "iterations": 100,
-      "real_time": 3.9102597971577787e+04,
-      "cpu_time": 3.8846236999999957e+04,
+      "real_time": 5.9913604720131839e+06,
+      "cpu_time": 5.9479740479999753e+06,
       "time_unit": "ns"
     },
     {
-      "name": "ConjuntoTrabalho_PorObjeto/10000/iterations:10/repeats:100_median",
+      "name": "ConjuntoTrabalho_PorObjeto/1000000/iterations:10/repeats:100_median",
       "family_index": 0,
       "per_family_instance_index": 0,
-      "run_name": "ConjuntoTrabalho_PorObjeto/10000/iterations:10/repeats:100",
+      "run_name": "ConjuntoTrabalho_PorObjeto/1000000/iterations:10/repeats:100",
       "run_type": "aggregate",
       "repetitions": 100,
       "threads": 1,
       "aggregate_name": "median",
       "aggregate_unit": "time",
       "iterations": 100,
-      "real_time": 3.7333050022425596e+04,
-      "cpu_time": 3.7179349999999846e+04,
+      "real_time": 5.9039752998614861e+06,
+      "cpu_time": 5.8711611999999750e+06,
       "time_unit": "ns"
     },
     {
-      "name": "ConjuntoTrabalho_PorObjeto/10000/iterations:10/repeats:100_stddev",
+      "name": "ConjuntoTrabalho_PorObjeto/1000000/iterations:10/repeats:100_stddev",
       "family_index": 0,
       "per_family_instance_index": 0,
-      "run_name": "ConjuntoTrabalho_PorObjeto/10000/iterations:10/repeats:100",
+      "run_name": "ConjuntoTrabalho_PorObjeto/1000000/iterations:10/repeats:100",
       "run_type": "aggregate",
       "repetitions": 100,
       "threads": 1,
       "aggregate_name": "stddev",
       "aggregate_unit": "time",
       "iterations": 100,
-      "real_time": 5.6966460554184614e+03,
-      "cpu_time": 5.5884198394854102e+03,
+      "real_time": 2.6780415251011332e+05,
+      "cpu_time": 2.5779754497294049e+05,
       "time_unit": "ns"
     },
     {
-      "name": "ConjuntoTrabalho_PorObjeto/10000/iterations:10/repeats:100_cv",
+      "name": "ConjuntoTrabalho_PorObjeto/1000000/iterations:10/repeats:100_cv",
       "family_index": 0,
       "per_family_instance_index": 0,
-      "run_name": "ConjuntoTrabalho_PorObjeto/10000/iterations:10/repeats:100",
+      "run_name": "ConjuntoTrabalho_PorObjeto/1000000/iterations:10/repeats:100",
       "run_type": "aggregate",
       "repetitions": 100,
       "threads": 1,
       "aggregate_name": "cv",
       "aggregate_unit": "percentage",
       "iterations": 100,
-      "real_time": 1.4568459260837710e-01,
-      "cpu_time": 1.4386000475375302e-01,
+      "real_time": 4.4698387580096186e-02,
+      "cpu_time": 4.3342076292284037e-02,
       "time_unit": "ns"
     }
   ]

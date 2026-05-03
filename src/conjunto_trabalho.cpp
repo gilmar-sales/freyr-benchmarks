@@ -3,8 +3,8 @@
 
 struct DynamicObject
 {
-    glm::vec3 position;
-    glm::vec3 velocity;
+    glm::vec3 position{};
+    glm::vec3 velocity{};
     glm::vec3 acceleration = { 1.0f, 3.0f, 2.0f };
     glm::vec3 gravity      = { 0.0f, -9.81f, 0.0f };
 };
@@ -104,19 +104,19 @@ static void ConjuntoTrabalho_PorBlocos(benchmark::State& state)
 }
 
 BENCHMARK(ConjuntoTrabalho_PorSistema)
-    ->Arg(10'000)
+    ->Arg(1000'000)
     ->Repetitions(100)
     ->Iterations(10)
     ->ReportAggregatesOnly(true);
 
 BENCHMARK(ConjuntoTrabalho_PorObjeto)
-    ->Arg(10'000)
+    ->Arg(1000'000)
     ->Repetitions(100)
     ->Iterations(10)
     ->ReportAggregatesOnly(true);
 
 BENCHMARK(ConjuntoTrabalho_PorBlocos)
-    ->Arg(10'000)
+    ->Arg(1000'000)
     ->Repetitions(100)
     ->Iterations(10)
     ->ReportAggregatesOnly(true);

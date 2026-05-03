@@ -1,29 +1,29 @@
-2026-04-09T23:06:27-03:00
-Running /home/gilmar/dev/freyr-benchmarks/scripts/../build/conjunto_trabalho
-Run on (14 X 3121.32 MHz CPU s)
+2026-05-03T19:38:07-03:00
+Running /home/gilmar/dev/freyr-benchmarks/scripts/../cmake-build-release/conjunto_trabalho
+Run on (28 X 3590.42 MHz CPU s)
 CPU Caches:
   L1 Data 32 KiB (x14)
   L1 Instruction 32 KiB (x14)
   L2 Unified 256 KiB (x14)
   L3 Unified 35840 KiB (x1)
-Load Average: 0.33, 3.09, 4.95
+Load Average: 2.65, 2.22, 4.17
 
- Performance counter stats for '/home/gilmar/dev/freyr-benchmarks/scripts/../build/conjunto_trabalho --benchmark_report_aggregates_only=true --benchmark_format=csv --benchmark_out=../data/conjunto_trabalho_ConjuntoTrabalho_PorBloco_linux.json --benchmark_filter=ConjuntoTrabalho_PorBloco':
+ Performance counter stats for '/home/gilmar/dev/freyr-benchmarks/scripts/../cmake-build-release/conjunto_trabalho --benchmark_report_aggregates_only=true --benchmark_format=csv --benchmark_out=../data/conjunto_trabalho_ConjuntoTrabalho_PorBloco_linux.json --benchmark_filter=ConjuntoTrabalho_PorBloco':
 
-       153.266.306      cycles:u                                                                (76,91%)
-       239.696.022      instructions:u                                                          (88,46%)
-         8.502.368      branches:u                                                              (88,45%)
-            72.384      branch-misses:u                                                         (88,45%)
-         5.314.172      cache-references:u                                                      (88,44%)
-             3.907      cache-misses:u                                                          (88,46%)
-       121.064.354      L1-dcache-loads:u                                                       (88,45%)
-         8.459.918      L1-dcache-load-misses:u                                                 (93,07%)
-         5.145.890      LLC-loads:u                                                             (94,21%)
-               922      LLC-load-misses:u                                                       (93,55%)
+    24.066.537.061      cycles:u                                                                (40,02%)
+    23.772.715.525      instructions:u                                                          (50,03%)
+       770.663.601      branches:u                                                              (50,03%)
+         4.525.147      branch-misses:u                                                         (50,03%)
+       637.017.616      cache-references:u                                                      (50,03%)
+       193.043.326      cache-misses:u                                                          (49,99%)
+    12.065.787.093      L1-dcache-loads:u                                                       (39,89%)
+       872.415.041      L1-dcache-load-misses:u                                                 (19,99%)
+       621.643.709      LLC-loads:u                                                             (19,99%)
+       192.247.611      LLC-load-misses:u                                                       (29,99%)
 
-       0,052386544 seconds time elapsed
+       7,204284347 seconds time elapsed
 
-       0,052035000 seconds user
-       0,000000000 seconds sys
+       6,765515000 seconds user
+       0,398182000 seconds sys
 
 

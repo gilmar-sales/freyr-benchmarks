@@ -35,7 +35,7 @@ def load_data() -> pd.DataFrame:
     df["short_name"] = df["base_name"].str.split("/").str[0]
 
     for col in ["real_time", "cpu_time", "iterations"]:
-        df[col] = pd.to_numeric(df[col], errors="coerce")
+        df[col] = pd.to_numeric(df[col], errors="coerce") / 1000000
 
     return df
 
@@ -84,18 +84,18 @@ def fig_bar_aggregates(df: pd.DataFrame) -> go.Figure:
                 name=label.capitalize(),
                 x=list(benchmarks),
                 y=vals,
-                text=[f"{v:,.1f}" for v in vals],
+                text=[f"{v:,.2f}" for v in vals],
                 textposition="outside",
                 hovertemplate="<b>%{x}</b><br>"
-                + label
-                + ": %{y:,.2f} ns<extra></extra>",
+                              + label
+                              + ": %{y:,.2f} ms<extra></extra>",
             )
         )
     fig.update_layout(
         **LAYOUT_BASE,
-        title="Agregados por Benchmark — Tempo real (ns)",
+        title="Agregados por Benchmark — Tempo real (ms)",
         barmode="group",
-        yaxis_title="Tempo real (ns)",
+        yaxis_title="Tempo real (ms)",
         xaxis_title="Benchmark",
     )
     return fig
@@ -107,12 +107,7 @@ def main() -> None:
 
     print_summary(runs)
 
-    figures = [
-        fig_bar_aggregates(df),
-    ]
-
-    for i, fig in enumerate(figures):
-        fig.write_html(Path(f"../resources/conjunto_trabalho_{i}.html"))
+    fig_bar_aggregates(df).write_html(Path(f"../resources/conjunto_trabalho.html"))
 
 
 if __name__ == "__main__":

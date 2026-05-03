@@ -1,5 +1,5 @@
 name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
-"ConjuntoTrabalho_PorSistema/10000/iterations:10/repeats:100_mean",100,86554.9,85605.2,ns,,,,,
-"ConjuntoTrabalho_PorSistema/10000/iterations:10/repeats:100_median",100,84399.2,83583.4,ns,,,,,
-"ConjuntoTrabalho_PorSistema/10000/iterations:10/repeats:100_stddev",100,8759.25,7960.48,ns,,,,,
-"ConjuntoTrabalho_PorSistema/10000/iterations:10/repeats:100_cv",100,0.101199,0.0929906,,,,,,
+"ConjuntoTrabalho_PorSistema/1000000/iterations:10/repeats:100_mean",100,1.58533e+07,1.57546e+07,ns,,,,,
+"ConjuntoTrabalho_PorSistema/1000000/iterations:10/repeats:100_median",100,1.58187e+07,1.57136e+07,ns,,,,,
+"ConjuntoTrabalho_PorSistema/1000000/iterations:10/repeats:100_stddev",100,470031,461484,ns,,,,,
+"ConjuntoTrabalho_PorSistema/1000000/iterations:10/repeats:100_cv",100,0.0296487,0.029292,,,,,,
