@@ -1,0 +1,13 @@
+name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
+"ConjuntoTrabalho_PorSistema/1000000/iterations:10/repeats:100_mean",100,1.54662e+07,1.53514e+07,ns,,,,,
+"ConjuntoTrabalho_PorSistema/1000000/iterations:10/repeats:100_median",100,1.52707e+07,1.51308e+07,ns,,,,,
+"ConjuntoTrabalho_PorSistema/1000000/iterations:10/repeats:100_stddev",100,618732,594555,ns,,,,,
+"ConjuntoTrabalho_PorSistema/1000000/iterations:10/repeats:100_cv",100,0.0400054,0.0387297,,,,,,
+"ConjuntoTrabalho_PorObjeto/1000000/iterations:10/repeats:100_mean",100,5.73727e+06,5.67468e+06,ns,,,,,
+"ConjuntoTrabalho_PorObjeto/1000000/iterations:10/repeats:100_median",100,5.65534e+06,5.54858e+06,ns,,,,,
+"ConjuntoTrabalho_PorObjeto/1000000/iterations:10/repeats:100_stddev",100,195465,220568,ns,,,,,
+"ConjuntoTrabalho_PorObjeto/1000000/iterations:10/repeats:100_cv",100,0.0340693,0.0388689,,,,,,
+"ConjuntoTrabalho_PorBlocos/1000000/iterations:10/repeats:100_mean",100,6.51784e+06,6.50309e+06,ns,,,,,
+"ConjuntoTrabalho_PorBlocos/1000000/iterations:10/repeats:100_median",100,6.49155e+06,6.47786e+06,ns,,,,,
+"ConjuntoTrabalho_PorBlocos/1000000/iterations:10/repeats:100_stddev",100,122219,120198,ns,,,,,
+"ConjuntoTrabalho_PorBlocos/1000000/iterations:10/repeats:100_cv",100,0.0187515,0.0184832,,,,,,
